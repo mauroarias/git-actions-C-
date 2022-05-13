@@ -1,0 +1,28 @@
+**/.vs
+.vscode
+**/.idea
+**/obj
+**/bin
+**/Release
+**/Debug
+*.user
+*.suo
+*.DS_Store
+/packages/
+**/DerivedData
+**/.Runtime
+**/reporting
+.sonarqube
+*.swp
+docker-compose.yml
+
+# Cloud
+secrets.props
+
+# Project and Sync Servers
+usersettings.json
+usersettings.*.json
+testsettings.json
+gcp-credentials.json
+
+nugets/dist/*
