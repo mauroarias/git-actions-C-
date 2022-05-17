@@ -10,9 +10,9 @@ printMessage "Building docker integration test image"
 dockerBuild DockerfileItest "itest:test"
 
 # Starting infra
-docker-compose down
+docker-compose -f docker-compose.yml down
 printTitleWithColor "Starting infra" "${yellow}"
-docker-compose up -d || exitOnError "error starting infra"
+docker-compose -f docker-compose.yml up -d || exitOnError "error starting infra"
 
 # wait
 sleep 4
@@ -26,4 +26,4 @@ docker run -i --network=$networkName -v $path/reporting:/reporting itest:test ||
 
 # Stopping infra
 printTitleWithColor "Stopping infra" "${yellow}"
-docker-compose down || exitOnError "error stopping infra"
+docker-compose -f docker-compose.yml down || exitOnError "error stopping infra"
