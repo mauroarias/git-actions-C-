@@ -15,7 +15,6 @@
 **/db
 .sonarqube
 *.swp
-docker-compose.yml
 
 # Cloud
 secrets.props
