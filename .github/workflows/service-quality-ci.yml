@@ -11,3 +11,13 @@ jobs:
         working-directory: app/ProjectPoc
       - run: scripts/Itest.sh
         working-directory: app/IntegrationTest
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: "app/IntegrationTest/reporting/*.html"
+      - name: Publish logs
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: "app/IntegrationTest/reporting/*.log"

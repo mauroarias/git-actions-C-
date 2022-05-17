@@ -26,6 +26,9 @@ printTitleWithColor "Running Itests" "${yellow}"
 getNetworkNameFromDockerCompose
 docker run -i --network=$networkName -v $path/reporting:/reporting itest:test || printAlert "some tests fail, please check reporting"
 
+# keeping logs
+docker-compose logs -t > $path/reporting/logs.log
+ 
 # Stopping infra
 printTitleWithColor "Stopping infra" "${yellow}"
 docker-compose down || exitOnError "error stopping infra"
