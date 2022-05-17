@@ -8,6 +8,7 @@ jobs:
         with:
           path: app
       - run: cd app/ProjectPoc
-      - run: docker build -f Dockerlile -t projectpoc:test .
+      - run: ls -als
+      - run: docker build -f Dockerfile -t projectpoc:test .
       - run: cd ../IntegrationTest
       - run: scripts/Itest.sh
