@@ -7,8 +7,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           path: app
-      - run: cd app/ProjectPoc
       - run: ls -als
+        working-directory: app/ProjectPoc
       - run: docker build -f Dockerfile -t projectpoc:test .
-      - run: cd ../IntegrationTest
+        working-directory: app/ProjectPoc
       - run: scripts/Itest.sh
+        working-directory: app/IntegrationTest
