@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectPoc.Model;
 
-namespace ProjectPoc.Controllers;
+namespace ProjectPoc;
 
 [ApiController]
 [Route("/project")]
@@ -12,22 +12,22 @@ public class ProjectController
     private readonly ProjectContext _projectContext;
     private readonly ILogger<ProjectController> _logger;
 
-    public ProjectController(ProjectContext projectContext, ILogger<ProjectController> logger, IConfiguration configuration)
+    public ProjectController(ProjectContext projectContext, GenesisClient genesisClient, ILogger<ProjectController> logger)
     {
-        var host = configuration["genesis:host"];
-        var port = configuration["genesis:port"];
-        _genesisClient = GenesisClient.BuildClient($"{host}:{port}");
+        _genesisClient = genesisClient;
         _projectContext = projectContext;
         _logger = logger;
     }
-
-
+    
     [HttpPost]
     public async Task<IResult> Post(Project project)
     {
         _logger.LogInformation("getting project '[{project}]'", project);
         project.id = Guid.NewGuid();
-        project.license = _genesisClient.GetUser(project.licenseId).Result;
+        var license = _genesisClient.GetUser(project.licenseId).Result;
+        project.licenseEmail = license.email;
+        project.licenseName = license.name;
+        project.licenseExpiresAt = license.expires_at;
         _projectContext.Add(project);
         await _projectContext.SaveChangesAsync();
         return Results.Created($"/project/{project.id}", project);
@@ -36,13 +36,13 @@ public class ProjectController
     [HttpGet]
     public async Task<IEnumerable<Project>> GetAll()
     {
-        return await _projectContext.Projects.Include(a => a.license).ToListAsync();
+        return await _projectContext.Projects.ToListAsync();
     }
 
     [HttpGet("{id}")]
     public async Task<IResult> Get(Guid id)
     {
-        return await _projectContext.Projects.Include(a => a.license).FirstOrDefaultAsync(i => i.id == id) is Project project ? Results.Ok(project) : Results.NotFound();
+        return await _projectContext.Projects.FirstOrDefaultAsync(i => i.id == id) is Project project ? Results.Ok(project) : Results.NotFound();
     }
 
     [HttpDelete("{id}")]

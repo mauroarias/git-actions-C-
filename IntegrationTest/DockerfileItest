@@ -11,4 +11,4 @@ FROM build AS testrunner
 WORKDIR /Itest
 COPY --from=build /Itest/build .
 RUN mkdir /reporting
-CMD ["dotnet", "test", "itest.dll", "--logger", "html", "--results-directory", "/reporting", "--no-restore"]
+CMD ["dotnet", "test", "itest.dll", "--logger", "html", "--results-directory", "/reporting"]

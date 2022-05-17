@@ -6,22 +6,17 @@ public class GenesisClient
 {
     private readonly HttpClient _httpClient;
 
-    private GenesisClient(HttpClient httpClient)
+    public GenesisClient(HttpClient httpClient, IConfiguration configuration)
     {
-        this._httpClient = httpClient;
+        var host = configuration["genesis:host"];
+        var port = configuration["genesis:port"];
+        _httpClient = httpClient;
+        _httpClient.BaseAddress = new Uri($"{host}:{port}");
     }
     
     public async Task<License?> GetUser(Guid licenseId)
     {
         var license = await _httpClient.GetFromJsonAsync<License>($"/v1/core/api/license/{licenseId}");
         return license;
-    }
-
-    public static GenesisClient BuildClient(string host)
-    {
-        var client = new HttpClient();
-        client.BaseAddress = new Uri(host);
-        var genesisClient = new GenesisClient(client);
-        return genesisClient;
     }
 }

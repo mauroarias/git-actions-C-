@@ -22,6 +22,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 //add health check probe
 builder.Services.AddHealthChecks();
 
+builder.Services.AddSingleton<HttpClient>();
+builder.Services.AddSingleton<GenesisClient>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

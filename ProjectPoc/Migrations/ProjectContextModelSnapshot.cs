@@ -22,28 +22,6 @@ namespace ProjectPoc.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("GenesisMock.Model.License", b =>
-                {
-                    b.Property<Guid>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("expires_at")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("id");
-
-                    b.ToTable("License");
-                });
-
             modelBuilder.Entity("ProjectPoc.Model.Project", b =>
                 {
                     b.Property<Guid?>("id")
@@ -57,8 +35,17 @@ namespace ProjectPoc.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("licenseEmail")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("licenseExpiresAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<Guid>("licenseId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("licenseName")
+                        .HasColumnType("text");
 
                     b.Property<string>("name")
                         .IsRequired()
@@ -66,20 +53,7 @@ namespace ProjectPoc.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("licenseId");
-
                     b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("ProjectPoc.Model.Project", b =>
-                {
-                    b.HasOne("GenesisMock.Model.License", "license")
-                        .WithMany()
-                        .HasForeignKey("licenseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("license");
                 });
 #pragma warning restore 612, 618
         }

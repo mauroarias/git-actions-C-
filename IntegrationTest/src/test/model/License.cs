@@ -1,8 +1,8 @@
-using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
-namespace GenesisMock.Model;
+namespace IntegrationTest.test.model;
 
-public class License
+public record License
 {
     public Guid id { get; set; }
     public string name { get; set; } = null!;

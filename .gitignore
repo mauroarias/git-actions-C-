@@ -12,6 +12,7 @@
 **/DerivedData
 **/.Runtime
 **/reporting
+**/db
 .sonarqube
 *.swp
 docker-compose.yml
