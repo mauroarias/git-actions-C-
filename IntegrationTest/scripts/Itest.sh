@@ -3,16 +3,18 @@
 source scripts/CommonLib.sh
 
 # Building docker test images
-printTitleWithColor "building docvker images" "${yellow}"
+printTitleWithColor "building docker images" "${yellow}"
 printMessage "Building docker init image"
 dockerBuild DockerfileInit "itestinit:test"
 printMessage "Building docker integration test image"
 dockerBuild DockerfileItest "itest:test"
 
 # Starting infra
-docker-compose -f docker-compose.yml down
+ls -als
+pwd
+docker-compose down
 printTitleWithColor "Starting infra" "${yellow}"
-docker-compose -f docker-compose.yml up -d || exitOnError "error starting infra"
+docker-compose up -d || exitOnError "error starting infra"
 
 # wait
 sleep 4
@@ -26,4 +28,4 @@ docker run -i --network=$networkName -v $path/reporting:/reporting itest:test ||
 
 # Stopping infra
 printTitleWithColor "Stopping infra" "${yellow}"
-docker-compose -f docker-compose.yml down || exitOnError "error stopping infra"
+docker-compose down || exitOnError "error stopping infra"

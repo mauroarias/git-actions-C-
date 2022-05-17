@@ -9,7 +9,7 @@ jobs:
           path: app
       - run: ls -als
         working-directory: app/ProjectPoc
-      - run: docker build -f Dockerfile -t projectpoc:test .
+      - run: docker build -t projectpoc:test .
         working-directory: app/ProjectPoc
       - run: scripts/Itest.sh
         working-directory: app/IntegrationTest
