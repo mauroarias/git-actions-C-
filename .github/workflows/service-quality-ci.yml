@@ -8,6 +8,6 @@ jobs:
         with:
           path: app
       - run: cd app/ProjectPoc
-      - run: docker build -t ProjectPoc:test .
+      - run: docker build -t projectpoc:test .
       - run: cd ../IntegrationTest
       - run: scripts/Itest.sh
