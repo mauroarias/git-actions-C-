@@ -17,7 +17,7 @@ printTitleWithColor "Starting infra" "${yellow}"
 docker-compose up -d || exitOnError "error starting infra"
 
 # wait
-sleep 20
+sleep 40
 
 # run tests
 path=$(pwd)
