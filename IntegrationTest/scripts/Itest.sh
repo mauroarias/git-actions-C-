@@ -10,8 +10,6 @@ printMessage "Building docker integration test image"
 dockerBuild DockerfileItest "itest:test"
 
 # Starting infra
-ls -als
-pwd
 docker-compose down
 printTitleWithColor "Starting infra" "${yellow}"
 docker-compose up -d || exitOnError "error starting infra"
