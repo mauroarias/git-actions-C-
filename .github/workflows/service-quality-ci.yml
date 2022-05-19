@@ -1,14 +1,14 @@
 name: Service quality CI
 on: [push]
 jobs:
-  do-it:
-    runs-on: ubuntu-latest    
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          path: app
-      - run: ls -als
-      - run: ls -als app/
+#  do-it:
+#    runs-on: ubuntu-latest    
+#    steps:
+#      - uses: actions/checkout@v3
+#        with:
+#          path: app
+#      - run: ls -als
+#      - run: ls -als app/
 #      - run: docker build -t projectpoc:test .
 #        working-directory: app/ProjectPoc
 #      - run: scripts/Itest.sh
