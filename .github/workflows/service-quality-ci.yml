@@ -1,7 +1,7 @@
 name: Service quality CI
 on: [push]
 jobs:
-  build-docker:
+  do-it:
     runs-on: ubuntu-latest    
     steps:
       - uses: actions/checkout@v3
@@ -18,5 +18,4 @@ jobs:
 #        with:
 #          name: reporting
 #          path: app/IntegrationTest/reporting
-    docker:
-      user: mauroarias/custom-action/.github/workflows/share-qa-workflow.yml@main
+      - uses: mauroarias/custom-action/.github/workflows/share-qa-workflow.yml@main
