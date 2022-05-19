@@ -18,4 +18,5 @@ jobs:
 #        with:
 #          name: reporting
 #          path: app/IntegrationTest/reporting
-      - uses: mauroarias/custom-action/.github/workflows/share-qa-workflow.yml@main
+  test:
+    uses: mauroarias/custom-action/.github/workflows/share-qa-workflow.yml@main
