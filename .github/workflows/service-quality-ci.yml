@@ -20,3 +20,7 @@ jobs:
 #          path: app/IntegrationTest/reporting
   test:
     uses: mauroarias/custom-action/.github/workflows/share-qa-workflow.yml@main
+    with:
+      service_name: ProjectPoc
+      dockerfile_path: ProjectPoc
+      itest_path: IntegrationTest
