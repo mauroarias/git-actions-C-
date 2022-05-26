@@ -15,6 +15,7 @@
 **/db
 .sonarqube
 *.swp
+**/share-qa-libs
 
 # Cloud
 secrets.props

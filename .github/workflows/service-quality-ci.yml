@@ -23,4 +23,6 @@ jobs:
     with:
       service_name: ProjectPoc
       dockerfile_path: ProjectPoc
-      itest_path: IntegrationTest
+      itest_path: IntegrationTest/
+      migration_path: ProjectPoc/
+      
